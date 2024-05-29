@@ -69,6 +69,34 @@ namespace reportesApi.Controllers
             return new JsonResult(objectResponse);
 
         }
+
+        [HttpGet("GetNotasEntrada")]
+        public JsonResult GetNotasEntrada([FromQuery] string fecha_inicial, string fecha_final, int sucursal)
+        {
+
+            var objectResponse = Helper.GetStructResponse();
+            try
+            {
+                var articulo = _articulosService.GetNotasEntrada(fecha_inicial, fecha_final, sucursal);
+                objectResponse.StatusCode = (int)HttpStatusCode.OK;
+                objectResponse.success = true;
+                objectResponse.message = "data cargado con exito";
+
+                objectResponse.response = new
+                {
+                    data =  articulo
+                };
+            }
+            catch (System.Exception ex)
+            {
+                Console.Write(ex.Message);
+                throw;
+            }
+
+
+            return new JsonResult(objectResponse);
+
+        }
     }
 
 

@@ -55,6 +55,43 @@ namespace reportesApi.Services
            
         }
 
+        public List<NotaEntradaModel> GetNotasEntrada(string fecha_inicial, string fecha_final, int sucursal)
+        {
+            
+            List<NotaEntradaModel> lista = new List<NotaEntradaModel>();
+            ConexionDataAccess dac = new ConexionDataAccess(connection);
+            ArrayList parametros = new ArrayList();
+            parametros.Add(new SqlParameter { ParameterName = "@pFechaInicial", SqlDbType = SqlDbType.VarChar, Value = fecha_inicial });
+            parametros.Add(new SqlParameter { ParameterName = "@pFechaFinal", SqlDbType = SqlDbType.VarChar, Value = fecha_final });
+            parametros.Add(new SqlParameter { ParameterName = "@pIdSucursal", SqlDbType = SqlDbType.VarChar, Value = sucursal });
+            try
+            {
+                DataSet ds = dac.Fill("GetNotasEntrada", parametros);
+                if (ds.Tables[0].Rows.Count > 0)
+                {
+                    foreach (DataRow row in ds.Tables[0].Rows)
+                    {
+                        lista.Add(new NotaEntradaModel{
+                            Factura  = row["Factura"].ToString(),
+                            //Nota  = row["Descripcion"].ToString(),
+                            Total = decimal.Parse(row["Total"].ToString()),
+                            Estatus = row["Estatus"].ToString(),
+                            Proveedor = row["Proveedor"].ToString(),
+                            Id = int.Parse(row["id"].ToString()),
+                            Fecha = row["FechaRegistro"].ToString(),
+                        });
+                    }
+                }
+                return lista;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            return lista;
+           
+        }
+
 
 
     
