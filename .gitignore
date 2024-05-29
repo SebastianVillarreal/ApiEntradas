@@ -1,0 +1,128 @@
+# Compiled source files
+*.dll
+*.exe
+*.so
+*.dylib
+*.pdb
+*.db
+*.testResults
+
+# Folders
+bin/
+obj/
+TestResults/
+.vscode/
+
+# User-specific files
+*.rsuser
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+*.sln.ide
+
+# Auto-generated files
+*.csproj.user
+*.csproj.vspscc
+*.csproj.nuget.dgspec.json
+*.csproj.nuget.g.props
+*.csproj.nuget.g.targets
+*.nupkg
+*.snupkg
+*.symbols.nupkg
+project.lock.json
+project.fragment.lock.json
+artifacts/
+
+# Logs
+*.log
+*.tlg
+
+# Windows image file caches
+Thumbs.db
+ehthumbs.db
+
+# Folder config file
+Desktop.ini
+
+# Recycle Bin used on file shares
+$RECYCLE.BIN/
+
+# VS Code directories
+.vscode/
+.vscode-test/
+
+# Rider directories
+.idea/
+.idea_modules/
+
+# Files built by Visual Studio
+.vs/
+.vscode/
+.vscode/
+.vsconfig
+.vsdconfig
+.vscode/configurations.json
+.vscode/c_cpp_properties.json
+.vscode/launch.json
+.vscode/settings.json
+
+# Local history for Visual Studio
+.history/
+.history.0/
+.history.x/
+
+# User-specific files
+.vscode/**/tasks.json
+.vscode/**/launch.json
+.vscode/**/settings.json
+
+# Coverage results
+coverage/
+coverage*.json
+coverage*.xml
+coverage*.info
+.coverage
+.coveragexml
+*.coverage
+*.coveragexml
+
+# WebAPI related
+appsettings*.json
+secrets.json
+dotnet-local-garbage/
+
+# Dependency directories
+node_modules/
+jspm_packages/
+bower_components/
+
+# Optional npm cache directory
+.npm/
+
+# Miscellaneous
+*.lock
+*.log
+*.cache
+*.tmp
+
+# JetBrains Rider
+.idea/
+.idea_modules/
+*.iml
+.idea
+
+# File-based project format
+*.prj
+*.csproj
+*.vbproj
+*.fsproj
+
+# Azure Function bindings
+.local.settings.json
+
+# IDEs and Editors
+# Rider
+.idea/
+.idea_modules/
+*.iml
