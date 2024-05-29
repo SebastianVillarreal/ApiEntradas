@@ -41,6 +41,34 @@ namespace reportesApi.Controllers
             
             
         }
+
+        [HttpPost("InsertNotaEntrada")]
+        public JsonResult InsertNotaEntrada([FromBody] InsertNotaEntradaModel nota)
+        {
+
+            var objectResponse = Helper.GetStructResponse();
+            try
+            {
+                var articulo = _articulosService.InsertNotaEntrada(nota, 1);
+                objectResponse.StatusCode = (int)HttpStatusCode.OK;
+                objectResponse.success = true;
+                objectResponse.message = "data cargado con exito";
+
+                objectResponse.response = new
+                {
+                    data =  articulo
+                };
+            }
+            catch (System.Exception ex)
+            {
+                Console.Write(ex.Message);
+                throw;
+            }
+
+
+            return new JsonResult(objectResponse);
+
+        }
     }
 
 

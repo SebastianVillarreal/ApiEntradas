@@ -31,9 +31,33 @@ namespace reportesApi.Services
             
         }
 
+        public bool InsertNotaEntrada(InsertNotaEntradaModel nota, int user)
+        {
+            
+            List<InsumoModel> lista = new List<InsumoModel>();
+            ConexionDataAccess dac = new ConexionDataAccess(connection);
+            ArrayList parametros = new ArrayList();
+            parametros.Add(new SqlParameter { ParameterName = "@pIdProveedor", SqlDbType = SqlDbType.VarChar, Value = nota.IdProveedor });
+            parametros.Add(new SqlParameter { ParameterName = "@pIdSucursal", SqlDbType = SqlDbType.VarChar, Value = nota.IdSucursal });
+            parametros.Add(new SqlParameter { ParameterName = "@pFactura", SqlDbType = SqlDbType.VarChar, Value = nota.Factura });
+            parametros.Add(new SqlParameter { ParameterName = "@pIdUsuario", SqlDbType = SqlDbType.VarChar, Value = user });
+            try
+            {
+                dac.ExecuteNonQuery("InsertarNotaEntrada", parametros);
+                return true;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return false;
+
+            }
+           
+        }
 
 
 
+    
 
 
         public decimal Dividir(decimal numerador, decimal denominador)
