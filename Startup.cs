@@ -63,6 +63,7 @@ namespace reportesApi
             services.AddSingleton<LoginService>();
             services.AddSingleton<ComprasService>();
             services.AddSingleton<InsumosService>();
+            services.AddSingleton<DetalleComprasService>();
 
             services.AddCors();
 
