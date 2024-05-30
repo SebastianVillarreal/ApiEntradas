@@ -70,14 +70,14 @@ namespace reportesApi.Controllers
 
         }
 
-        [HttpGet("GetDetalleNotasEntrada")]
-        public JsonResult GetNotasEntrada([FromQuery] string fecha_inicial, string fecha_final, int sucursal)
+        [HttpGet("GetDetalleNotaEntrada")]
+        public JsonResult GetDetalleNotaEntrada([FromQuery] int id_nota)
         {
 
             var objectResponse = Helper.GetStructResponse();
             try
             {
-                var articulo = _articulosService.GetNotasEntrada(fecha_inicial, fecha_final, sucursal);
+                var articulo = _articulosService.GetDetalleNotaEntrada(id_nota);
                 objectResponse.StatusCode = (int)HttpStatusCode.OK;
                 objectResponse.success = true;
                 objectResponse.message = "data cargado con exito";

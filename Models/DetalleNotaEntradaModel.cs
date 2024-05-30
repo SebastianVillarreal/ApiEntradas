@@ -11,3 +11,13 @@ public class InsertarDetalleNotaEntradaModel
     
 
 }
+
+
+public class DetalleNotaEntradaModel: InsertarDetalleNotaEntradaModel
+{
+    public int Id {get; set;}
+    public string Fecha { get; set;}
+    public string DescripcionInsumo { get; set; }
+    
+}
+

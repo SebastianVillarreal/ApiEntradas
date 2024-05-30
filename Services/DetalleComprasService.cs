@@ -56,28 +56,25 @@ namespace reportesApi.Services
            
         }
 
-        public List<NotaEntradaModel> GetNotasEntrada(string fecha_inicial, string fecha_final, int sucursal)
+        public List<DetalleNotaEntradaModel> GetDetalleNotaEntrada(int id_nota)
         {
             
-            List<NotaEntradaModel> lista = new List<NotaEntradaModel>();
+            List<DetalleNotaEntradaModel> lista = new List<DetalleNotaEntradaModel>();
             ConexionDataAccess dac = new ConexionDataAccess(connection);
             ArrayList parametros = new ArrayList();
-            parametros.Add(new SqlParameter { ParameterName = "@pFechaInicial", SqlDbType = SqlDbType.VarChar, Value = fecha_inicial });
-            parametros.Add(new SqlParameter { ParameterName = "@pFechaFinal", SqlDbType = SqlDbType.VarChar, Value = fecha_final });
-            parametros.Add(new SqlParameter { ParameterName = "@pIdSucursal", SqlDbType = SqlDbType.VarChar, Value = sucursal });
+            parametros.Add(new SqlParameter { ParameterName = "@IdNota", SqlDbType = SqlDbType.VarChar, Value = id_nota });
             try
             {
-                DataSet ds = dac.Fill("GetNotasEntrada", parametros);
+                DataSet ds = dac.Fill("GetDetalleNotaEntrada", parametros);
                 if (ds.Tables[0].Rows.Count > 0)
                 {
                     foreach (DataRow row in ds.Tables[0].Rows)
                     {
-                        lista.Add(new NotaEntradaModel{
-                            Factura  = row["Factura"].ToString(),
-                            //Nota  = row["Descripcion"].ToString(),
-                            Total = decimal.Parse(row["Total"].ToString()),
-                            Estatus = row["Estatus"].ToString(),
-                            Proveedor = row["Proveedor"].ToString(),
+                        lista.Add(new DetalleNotaEntradaModel{
+                            Costo  = decimal.Parse( row["Costo"].ToString()),
+                            Cantidad = decimal.Parse(row["Cantidad"].ToString()),
+                            DescripcionInsumo = row["Descripcion"].ToString(),
+                            Insumo = row["insumo"].ToString(),
                             Id = int.Parse(row["id"].ToString()),
                             Fecha = row["FechaRegistro"].ToString(),
                         });
