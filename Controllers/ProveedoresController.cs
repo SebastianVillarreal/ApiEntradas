@@ -43,13 +43,13 @@ namespace reportesApi.Controllers
         }
 
         [HttpPost("InsertProveedor")]
-        public JsonResult InsertNotaEntrada([FromBody] InsertNotaEntradaModel nota)
+        public JsonResult InsertNotaEntrada([FromBody] InsertProveedorModel proveedor)
         {
 
             var objectResponse = Helper.GetStructResponse();
             try
             {
-                var articulo = _articulosService.InsertNotaEntrada(nota, 1);
+                var articulo = _articulosService.InsertProveedor(proveedor, 1);
                 objectResponse.StatusCode = (int)HttpStatusCode.OK;
                 objectResponse.success = true;
                 objectResponse.message = "data cargado con exito";

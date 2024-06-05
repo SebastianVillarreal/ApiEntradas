@@ -31,19 +31,20 @@ namespace reportesApi.Services
             
         }
 
-        public bool InsertNotaEntrada(InsertNotaEntradaModel nota, int user)
+        public bool InsertProveedor(InsertProveedorModel proveedor, int user)
         {
             
             List<InsumoModel> lista = new List<InsumoModel>();
             ConexionDataAccess dac = new ConexionDataAccess(connection);
             ArrayList parametros = new ArrayList();
-            parametros.Add(new SqlParameter { ParameterName = "@pIdProveedor", SqlDbType = SqlDbType.VarChar, Value = nota.IdProveedor });
-            parametros.Add(new SqlParameter { ParameterName = "@pIdSucursal", SqlDbType = SqlDbType.VarChar, Value = nota.IdSucursal });
-            parametros.Add(new SqlParameter { ParameterName = "@pFactura", SqlDbType = SqlDbType.VarChar, Value = nota.Factura });
-            parametros.Add(new SqlParameter { ParameterName = "@pIdUsuario", SqlDbType = SqlDbType.VarChar, Value = user });
+            parametros.Add(new SqlParameter { ParameterName = "@pClaveProveedor", SqlDbType = SqlDbType.VarChar, Value = proveedor.Clave });
+            parametros.Add(new SqlParameter { ParameterName = "@pNombre", SqlDbType = SqlDbType.VarChar, Value = proveedor.Nombre });
+            parametros.Add(new SqlParameter { ParameterName = "@pRFC", SqlDbType = SqlDbType.VarChar, Value = proveedor.RFC });
+            parametros.Add(new SqlParameter { ParameterName = "@pDireccion", SqlDbType = SqlDbType.VarChar, Value = proveedor.Direccion });
+            parametros.Add(new SqlParameter { ParameterName = "@pUsuario", SqlDbType = SqlDbType.VarChar, Value = user });
             try
             {
-                dac.ExecuteNonQuery("InsertarNotaEntrada", parametros);
+                dac.ExecuteNonQuery("InsertProveedor", parametros);
                 return true;
             }
             catch (Exception ex)
