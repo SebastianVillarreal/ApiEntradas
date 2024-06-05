@@ -64,6 +64,7 @@ namespace reportesApi
             services.AddSingleton<ComprasService>();
             services.AddSingleton<InsumosService>();
             services.AddSingleton<DetalleComprasService>();
+            services.AddSingleton<ProveedoresService>();
 
             services.AddCors();
 
@@ -111,8 +112,8 @@ namespace reportesApi
                 c.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo
                 {
                     Version = "v1",
-                    Title = "Reportes DataBrain",
-                    Description = "ASP.NET Core Web API for DataBrain reports",
+                    Title = "Api Entradas TW",
+                    Description = "ASP.NET Core Web API for Entradas TW",
                     TermsOfService = new Uri("https://example.com/terms"),
                     Contact = new Microsoft.OpenApi.Models.OpenApiContact
                     {
