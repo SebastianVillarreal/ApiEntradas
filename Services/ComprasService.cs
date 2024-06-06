@@ -92,6 +92,35 @@ namespace reportesApi.Services
            
         }
 
+        public List<SucursalModel> GetSucursales()
+        {
+            
+            List<SucursalModel> lista = new List<SucursalModel>();
+            ConexionDataAccess dac = new ConexionDataAccess(connection);
+            ArrayList parametros = new ArrayList();
+            try
+            {
+                DataSet ds = dac.Fill("GetSucursales", parametros);
+                if (ds.Tables[0].Rows.Count > 0)
+                {
+                    foreach (DataRow row in ds.Tables[0].Rows)
+                    {
+                        lista.Add(new SucursalModel{
+                            Id = int.Parse(row["id"].ToString()),
+                            Nombre = row["Nombre"].ToString(),
+                        });
+                    }
+                }
+                return lista;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            return lista;
+           
+        }
+
 
 
     

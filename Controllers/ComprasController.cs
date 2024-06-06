@@ -97,6 +97,34 @@ namespace reportesApi.Controllers
             return new JsonResult(objectResponse);
 
         }
+
+        [HttpGet("GetSucursales")]
+        public JsonResult GetSucursales()
+        {
+
+            var objectResponse = Helper.GetStructResponse();
+            try
+            {
+                var articulo = _articulosService.GetSucursales();
+                objectResponse.StatusCode = (int)HttpStatusCode.OK;
+                objectResponse.success = true;
+                objectResponse.message = "data cargado con exito";
+
+                objectResponse.response = new
+                {
+                    data =  articulo
+                };
+            }
+            catch (System.Exception ex)
+            {
+                Console.Write(ex.Message);
+                throw;
+            }
+
+
+            return new JsonResult(objectResponse);
+
+        }
     }
 
 
