@@ -94,6 +94,73 @@ namespace reportesApi.Services
            
         }
 
+        public int InsertDetalleReceta(InsertDetalleRecetaModel receta, int user)
+        {
+            
+            List<RecetaModel> lista = new List<RecetaModel>();
+            ConexionDataAccess dac = new ConexionDataAccess(connection);
+            ArrayList parametros = new ArrayList();
+            parametros.Add(new SqlParameter { ParameterName = "@pIdReceta", SqlDbType = SqlDbType.VarChar, Value = receta.IdReceta });
+            parametros.Add(new SqlParameter { ParameterName = "@pIdInsumo", SqlDbType = SqlDbType.VarChar, Value = receta.IdInsumo });
+            parametros.Add(new SqlParameter { ParameterName = "@pCantidad", SqlDbType = SqlDbType.VarChar, Value = receta.Cantidad });
+            parametros.Add(new SqlParameter { ParameterName = "@pReferencia", SqlDbType = SqlDbType.VarChar, Value = receta.Referencia });
+            parametros.Add(new SqlParameter { ParameterName = "@pIdUsuario", SqlDbType = SqlDbType.VarChar, Value = user });
+            try
+            {
+                DataSet ds = dac.Fill("InsertDetalleReceta", parametros);
+                if (ds.Tables[0].Rows.Count > 0)
+                {
+                    foreach (DataRow row in ds.Tables[0].Rows)
+                    {
+                        lista.Add(new RecetaModel{
+                            Id = int.Parse(row["id"].ToString()),
+                        });
+                    }
+                }
+                return lista[0].Id;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return 0;
+
+            }
+           
+        }
+
+        public List<DetalleRecetaModel> GetDetalleReceta(int id_receta)
+        {
+            
+            List<DetalleRecetaModel> lista = new List<DetalleRecetaModel>();
+            ConexionDataAccess dac = new ConexionDataAccess(connection);
+            ArrayList parametros = new ArrayList();
+            parametros.Add(new SqlParameter { ParameterName = "@pIdReceta", SqlDbType = SqlDbType.VarChar, Value = id_receta });
+            try
+            {
+                DataSet ds = dac.Fill("GetDetalleReceta", parametros);
+                if (ds.Tables[0].Rows.Count > 0)
+                {
+                    foreach (DataRow row in ds.Tables[0].Rows)
+                    {
+                        lista.Add(new DetalleRecetaModel{
+                            Id = int.Parse(row["id"].ToString()),
+                            IdInsumo =  int.Parse(row["IdInsumo"].ToString()),
+                            Cantidad = decimal.Parse( row["Cantidad"].ToString()),
+                            Insumo = row["Insumo"].ToString(),
+                            Referencia = row["Referencia"].ToString(),
+                        });
+                    }
+                }
+                return lista;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            return lista;
+           
+        }
+
 
 
     

@@ -97,6 +97,62 @@ namespace reportesApi.Controllers
             return new JsonResult(objectResponse);
 
         }
+
+        [HttpPost("InsertDetalleReceta")]
+        public JsonResult InsertDetalleReceta([FromBody] InsertDetalleRecetaModel receta)
+        {
+
+            var objectResponse = Helper.GetStructResponse();
+            try
+            {
+                var articulo = _articulosService.InsertDetalleReceta(receta, 1);
+                objectResponse.StatusCode = (int)HttpStatusCode.OK;
+                objectResponse.success = true;
+                objectResponse.message = "data cargado con exito";
+
+                objectResponse.response = new
+                {
+                    data =  articulo
+                };
+            }
+            catch (System.Exception ex)
+            {
+                Console.Write(ex.Message);
+                throw;
+            }
+
+
+            return new JsonResult(objectResponse);
+
+        }
+
+        [HttpGet("GetDetalleReceta")]
+        public JsonResult GetDetalleReceta([FromQuery] int receta)
+        {
+
+            var objectResponse = Helper.GetStructResponse();
+            try
+            {
+                var articulo = _articulosService.GetDetalleReceta(receta);
+                objectResponse.StatusCode = (int)HttpStatusCode.OK;
+                objectResponse.success = true;
+                objectResponse.message = "data cargado con exito";
+
+                objectResponse.response = new
+                {
+                    data =  articulo
+                };
+            }
+            catch (System.Exception ex)
+            {
+                Console.Write(ex.Message);
+                throw;
+            }
+
+
+            return new JsonResult(objectResponse);
+
+        }
     }
 
 

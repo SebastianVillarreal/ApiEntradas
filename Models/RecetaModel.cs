@@ -15,3 +15,18 @@ public class RecetaModel: InsertRecetaModel
     public string NombreSucursal { get; set; }
     public string FechaActualiza {get; set;}
 }
+
+public class InsertDetalleRecetaModel
+{
+    public int IdReceta { get; set;}
+    public int IdInsumo {get; set;}
+    public decimal Cantidad { get; set;}
+    public string Referencia { get; set;}
+
+}
+
+public class DetalleRecetaModel: InsertDetalleRecetaModel
+{
+    public int Id { get; set;}
+    public string Insumo { get; set; }
+}
