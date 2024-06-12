@@ -41,6 +41,7 @@ namespace reportesApi.Services
                     foreach (DataRow row in ds.Tables[0].Rows)
                     {
                         lista.Add(new InsumoModel{
+                            Id = int.Parse(row["Id"].ToString()),
                             Insumo  = row["Insumo"].ToString(),
                             Descripcion  = row["Descripcion"].ToString(),
                             Costo = decimal.Parse(row["Costo"].ToString()),

@@ -31,10 +31,10 @@ namespace reportesApi.Services
             
         }
 
-        public bool InsertNotaEntrada(InsertNotaEntradaModel nota, int user)
+        public int InsertNotaEntrada(InsertNotaEntradaModel nota, int user)
         {
             
-            List<InsumoModel> lista = new List<InsumoModel>();
+            List<NotaEntradaModel> lista = new List<NotaEntradaModel>();
             ConexionDataAccess dac = new ConexionDataAccess(connection);
             ArrayList parametros = new ArrayList();
             parametros.Add(new SqlParameter { ParameterName = "@pIdProveedor", SqlDbType = SqlDbType.VarChar, Value = nota.IdProveedor });
@@ -43,15 +43,24 @@ namespace reportesApi.Services
             parametros.Add(new SqlParameter { ParameterName = "@pIdUsuario", SqlDbType = SqlDbType.VarChar, Value = user });
             try
             {
-                dac.ExecuteNonQuery("InsertarNotaEntrada", parametros);
-                return true;
+                DataSet ds = dac.Fill("GetNotasEntrada", parametros);
+                if (ds.Tables[0].Rows.Count > 0)
+                {
+                    foreach (DataRow row in ds.Tables[0].Rows)
+                    {
+                        lista.Add(new NotaEntradaModel{
+                            Id = int.Parse(row["id"].ToString()),
+                        });
+                    }
+                }
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.Message);
-                return false;
+                return 0;
 
             }
+
+            return lista[0].Id;
            
         }
 
