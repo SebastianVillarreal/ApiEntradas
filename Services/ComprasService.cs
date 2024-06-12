@@ -43,7 +43,7 @@ namespace reportesApi.Services
             parametros.Add(new SqlParameter { ParameterName = "@pIdUsuario", SqlDbType = SqlDbType.VarChar, Value = user });
             try
             {
-                DataSet ds = dac.Fill("GetNotasEntrada", parametros);
+                DataSet ds = dac.Fill("InsertarNotaEntrada", parametros);
                 if (ds.Tables[0].Rows.Count > 0)
                 {
                     foreach (DataRow row in ds.Tables[0].Rows)
