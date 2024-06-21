@@ -81,6 +81,7 @@ namespace reportesApi.Services
                             Nombre = row["Nombre"].ToString(),
                             Id = int.Parse(row["id"].ToString()),
                             FechaActualiza = row["FechaActualiza"].ToString(),
+                            NombrePlatillo = row["Descripcion"].ToString()
                         });
                     }
                 }
