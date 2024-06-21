@@ -41,6 +41,7 @@ namespace reportesApi.Services
             parametros.Add(new SqlParameter { ParameterName = "@pNombre", SqlDbType = SqlDbType.VarChar, Value = receta.Nombre });
             parametros.Add(new SqlParameter { ParameterName = "@pIdPlatillo", SqlDbType = SqlDbType.VarChar, Value = receta.IdPlatillo });
             parametros.Add(new SqlParameter { ParameterName = "@pIdSucursal", SqlDbType = SqlDbType.VarChar, Value = receta.IdSucursal });
+            parametros.Add(new SqlParameter { ParameterName = "@pTipo", SqlDbType = SqlDbType.VarChar, Value = receta.Tipo });
             try
             {
                 DataSet ds = dac.Fill("InsertReceta", parametros);

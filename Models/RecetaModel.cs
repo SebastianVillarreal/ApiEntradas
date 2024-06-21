@@ -5,6 +5,7 @@ public class InsertRecetaModel
     public int IdSucursal  { get; set; }
     public string Nombre { get; set; }
     public int IdPlatillo { get; set; }
+    public int Tipo {get; set;}
 
 }
 
