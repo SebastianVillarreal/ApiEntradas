@@ -64,14 +64,17 @@ namespace reportesApi.Services
            
         }
 
-        public List<RecetaModel> GetRecetas()
+        public List<RecetaModel> GetRecetas(string fecha_inicial, string fecha_final)
         {
             
             List<RecetaModel> lista = new List<RecetaModel>();
             ConexionDataAccess dac = new ConexionDataAccess(connection);
             ArrayList parametros = new ArrayList();
+            parametros.Add(new SqlParameter { ParameterName = "@pFechaInicial", SqlDbType = SqlDbType.VarChar, Value = fecha_inicial });
+            parametros.Add(new SqlParameter { ParameterName = "@pFechaFinal", SqlDbType = SqlDbType.VarChar, Value = fecha_final });
             try
             {
+
                 DataSet ds = dac.Fill("GetRecetas", parametros);
                 if (ds.Tables[0].Rows.Count > 0)
                 {

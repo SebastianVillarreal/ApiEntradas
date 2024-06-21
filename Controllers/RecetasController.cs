@@ -71,13 +71,13 @@ namespace reportesApi.Controllers
         }
 
         [HttpGet("GetRecetas")]
-        public JsonResult GetRecetas()
+        public JsonResult GetRecetas([FromQuery] string fecha_inicial, string fecha_final)
         {
 
             var objectResponse = Helper.GetStructResponse();
             try
             {
-                var articulo = _articulosService.GetRecetas();
+                var articulo = _articulosService.GetRecetas(fecha_inicial, fecha_final);
                 objectResponse.StatusCode = (int)HttpStatusCode.OK;
                 objectResponse.success = true;
                 objectResponse.message = "data cargado con exito";
