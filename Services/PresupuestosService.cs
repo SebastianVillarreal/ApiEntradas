@@ -31,10 +31,10 @@ namespace reportesApi.Services
             
         }
 
-        public bool InsertPresupuesto(InsertPresupuestoModel presupuesto, int user)
+        public int InsertPresupuesto(InsertPresupuestoModel presupuesto, int user)
         {
             
-            List<InsumoModel> lista = new List<InsumoModel>();
+            List<PresupuestoModel> lista = new List<PresupuestoModel>();
             ConexionDataAccess dac = new ConexionDataAccess(connection);
             ArrayList parametros = new ArrayList();
             parametros.Add(new SqlParameter { ParameterName = "@pFecha", SqlDbType = SqlDbType.VarChar, Value = presupuesto.Fecha });
@@ -43,13 +43,24 @@ namespace reportesApi.Services
             parametros.Add(new SqlParameter { ParameterName = "@pReferencia", SqlDbType = SqlDbType.VarChar, Value = presupuesto.Referencia });
             try
             {
-                dac.ExecuteNonQuery("InsertPresupuestoProduccion", parametros);
-                return true;
+
+                DataSet ds = dac.Fill("InsertPresupuestoProduccion", parametros);
+                if (ds.Tables[0].Rows.Count > 0)
+                {
+                    foreach (DataRow row in ds.Tables[0].Rows)
+                    {
+                        lista.Add(new PresupuestoModel{
+                            Id = int.Parse(row["Id"].ToString()),
+                        });
+                    }
+                }
+                return lista[0].Id;
+
             }
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
-                return false;
+                return 0;
 
             }
            
