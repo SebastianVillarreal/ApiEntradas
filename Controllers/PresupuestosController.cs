@@ -155,9 +155,33 @@ namespace reportesApi.Controllers
 
         }
 
-       
+        [HttpGet("GetExplosionInsumosPresupuesto")]
+        public JsonResult GetExplosionInsumosPresupuesto([FromQuery] int id_presupuesto )
+        {
+
+            var objectResponse = Helper.GetStructResponse();
+            try
+            {
+                var articulo = _presupuestoService.GetExplosionInsumosPresupuesto(id_presupuesto);
+                objectResponse.StatusCode = (int)HttpStatusCode.OK;
+                objectResponse.success = true;
+                objectResponse.message = "data cargado con exito";
+
+                objectResponse.response = new
+                {
+                    data =  articulo
+                };
+            }
+            catch (System.Exception ex)
+            {
+                Console.Write(ex.Message);
+                throw;
+            }
 
 
+            return new JsonResult(objectResponse);
+
+        }
     }
 
 

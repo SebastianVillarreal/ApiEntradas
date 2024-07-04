@@ -26,3 +26,14 @@ public class DetallePresupuestoModel: InsertDetallePresupeustoModel
     public int Id { get; set;}
     public string Producto {get; set;}
 }
+
+
+public class GetExplosionInsumosModel
+{
+    public string Insumo {get; set;}
+    public string Descripcion {get; set;}
+    public decimal CantidadInsumo {get; set;}
+    public decimal Existencia {get; set;}
+    public decimal Faltante {get; set;}
+
+}

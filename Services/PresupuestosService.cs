@@ -153,7 +153,38 @@ namespace reportesApi.Services
         }
 
 
-
+        public List<GetExplosionInsumosModel> GetExplosionInsumosPresupuesto(int id)
+        {
+            
+            List<GetExplosionInsumosModel> lista = new List<GetExplosionInsumosModel>();
+            ConexionDataAccess dac = new ConexionDataAccess(connection);
+            ArrayList parametros = new ArrayList();
+            parametros.Add(new SqlParameter { ParameterName = "@pIdPresupuesto", SqlDbType = SqlDbType.VarChar, Value = id });
+            try
+            {
+                DataSet ds = dac.Fill("GetExplosionInsumos", parametros);
+                if (ds.Tables[0].Rows.Count > 0)
+                {
+                    foreach (DataRow row in ds.Tables[0].Rows)
+                    {
+                        lista.Add(new GetExplosionInsumosModel{
+                            Insumo =row["insumo"].ToString(),
+                            Descripcion = row["Descripcion"].ToString(),
+                            CantidadInsumo =decimal.Parse(row["cantidad"].ToString()),
+                            Existencia = decimal.Parse(row["Existencia"].ToString()),
+                            Faltante = decimal.Parse(row["Faltante"].ToString())
+                        });
+                    }
+                }
+                return lista;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            return lista;
+           
+        }
     
 
 
