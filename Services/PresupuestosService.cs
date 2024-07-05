@@ -185,6 +185,81 @@ namespace reportesApi.Services
             return lista;
            
         }
+
+        public List<GetInsumosOrdenProduccion> GetInsumosOrdenProduccion(int id)
+        {
+            
+            List<GetInsumosOrdenProduccion> lista = new List<GetInsumosOrdenProduccion>();
+            ConexionDataAccess dac = new ConexionDataAccess(connection);
+            ArrayList parametros = new ArrayList();
+            parametros.Add(new SqlParameter { ParameterName = "@pId", SqlDbType = SqlDbType.VarChar, Value = id });
+            try
+            {
+                DataSet ds = dac.Fill("GetInsumosOrdenProduccion", parametros);
+                if (ds.Tables[0].Rows.Count > 0)
+                {
+                    foreach (DataRow row in ds.Tables[0].Rows)
+                    {
+                        var insumos = new List<GetInsumosOrdenProduccion>();
+                        if(row["TipoInsumo"].ToString() == "2")
+                        {
+                            insumos = this.GetInsumosSecLevelOrdenProduccion(id, row["insumo"].ToString());
+                        }
+                        lista.Add(new GetInsumosOrdenProduccion{
+                            Insumo =row["insumo"].ToString(),
+                            Descripcion = row["Descripcion"].ToString(),
+                            Total =decimal.Parse(row["total"].ToString()),
+                            Existencia = decimal.Parse(row["Existencia"].ToString()),
+                            Faltante = decimal.Parse(row["Faltante"].ToString()),
+                            UM = row["UM"].ToString(),
+                            Insumos = insumos
+                        });
+                    }
+                }
+                return lista;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            return lista;
+           
+        }
+
+        public List<GetInsumosOrdenProduccion> GetInsumosSecLevelOrdenProduccion(int id, string insumo)
+        {
+            
+            List<GetInsumosOrdenProduccion> lista = new List<GetInsumosOrdenProduccion>();
+            ConexionDataAccess dac = new ConexionDataAccess(connection);
+            ArrayList parametros = new ArrayList();
+            parametros.Add(new SqlParameter { ParameterName = "@pIdOrdenProduccion", SqlDbType = SqlDbType.VarChar, Value = id });
+            parametros.Add(new SqlParameter { ParameterName = "@pInsumo", SqlDbType = SqlDbType.VarChar, Value = insumo });
+            try
+            {
+                DataSet ds = dac.Fill("GetInsumosSecLevel", parametros);
+                if (ds.Tables[0].Rows.Count > 0)
+                {
+                    foreach (DataRow row in ds.Tables[0].Rows)
+                    {
+                        lista.Add(new GetInsumosOrdenProduccion{
+                            Insumo =row["insumo"].ToString(),
+                            Descripcion = row["Descripcion"].ToString(),
+                            Total =decimal.Parse(row["total"].ToString()),
+                            Existencia = decimal.Parse(row["Existencia"].ToString()),
+                            Faltante = decimal.Parse(row["Faltante"].ToString()),
+                            UM = row["UM"].ToString(),
+                        });
+                    }
+                }
+                return lista;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            return lista;
+           
+        }
     
 
 

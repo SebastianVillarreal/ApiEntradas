@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+
 namespace reportesApi.Models;
 
 public class InsertPresupuestoModel
@@ -36,4 +38,16 @@ public class GetExplosionInsumosModel
     public decimal Existencia {get; set;}
     public decimal Faltante {get; set;}
 
+}
+
+
+public class GetInsumosOrdenProduccion
+{
+    public string Insumo {get; set;}
+    public string Descripcion {get; set;}
+    public decimal Total {get; set;}
+    public decimal Existencia {get; set;}
+    public decimal Faltante {get; set;}
+    public string UM {get; set;}
+    public List<GetInsumosOrdenProduccion> Insumos {get;set ;}
 }

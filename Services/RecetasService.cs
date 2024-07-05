@@ -153,6 +153,7 @@ namespace reportesApi.Services
                             Cantidad = decimal.Parse( row["Cantidad"].ToString()),
                             Insumo = row["Insumo"].ToString(),
                             Referencia = row["Referencia"].ToString(),
+                            Descripcion =  row["Descripcion"].ToString(),
                         });
                     }
                 }

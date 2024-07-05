@@ -30,4 +30,5 @@ public class DetalleRecetaModel: InsertDetalleRecetaModel
 {
     public int Id { get; set;}
     public string Insumo { get; set; }
+    public string Descripcion {get; set;}
 }
