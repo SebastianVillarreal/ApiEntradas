@@ -260,6 +260,38 @@ namespace reportesApi.Services
             return lista;
            
         }
+
+        public List<PresupuestoModel> GetPresupuestoById(int id)
+        {
+            
+            List<PresupuestoModel> lista = new List<PresupuestoModel>();
+            ConexionDataAccess dac = new ConexionDataAccess(connection);
+            ArrayList parametros = new ArrayList();
+            parametros.Add(new SqlParameter { ParameterName = "@pId", SqlDbType = SqlDbType.VarChar, Value = id });
+            try
+            {
+                DataSet ds = dac.Fill("GetPresupuestoById", parametros);
+                if (ds.Tables[0].Rows.Count > 0)
+                {
+                    foreach (DataRow row in ds.Tables[0].Rows)
+                    {
+                        lista.Add(new PresupuestoModel{
+                            Id = int.Parse(row["Id"].ToString()),
+                            Fecha = row["Fecha"].ToString(),
+                            Referencia = row["Referencia"].ToString(),
+                            IdSucursal = int.Parse(row["IdSucursal"].ToString()),
+                        });
+                    }
+                }
+                return lista;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            return lista;
+           
+        }
     
 
 
